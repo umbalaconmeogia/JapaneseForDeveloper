@@ -1,0 +1,1 @@
+mecab.exe in.txt -o out.txt
