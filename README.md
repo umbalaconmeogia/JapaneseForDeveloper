@@ -6,10 +6,12 @@ Một hướng khác để giải quyết vấn đề này là giúp cho lập t
 Chương trình “Tiếng Nhật dành cho lập trình viên” được thiết kế để giúp lập trình viên (cũng như kỹ sư phần mềm) có thể học tiếng Nhật đáp ứng được nhu cầu này trong thời gian ngắn nhất. Đây cũng xem như bước cơ bản để các kỹ sư có thể học tiếp chương trình “Tiếng Nhật dành cho kỹ sư cầu nối”.
 
 Đặc điểm của tiếng Nhật trong tài liệu kỹ thuật là ngữ pháp đơn giản, viết súc tích, cho nên việc học tiếng Nhật đáp ứng nhu cầu hiểu tài liệu thiết kế đơn giản hơn rât nhiều so với học tiếng Nhật thông thường. Chương trình này được thiết kế với mục tiêu sau:
+
 1. Chỉ dạy đọc hiểu. Không dạy nghe, nói, viết cũng như cách phát âm.
 2. Thời gian học tập ngắn, không cần học tập trung.
 
 Chương trình cung cấp nội dung sau:
+
 1. Phương pháp học tập.
 2. Học từ vựng (chữ Hán và Katakana).
 3. Ngữ pháp tiếng Nhật đơn giản.
