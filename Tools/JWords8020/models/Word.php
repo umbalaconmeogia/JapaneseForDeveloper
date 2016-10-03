@@ -7,7 +7,7 @@ namespace app\models;
  * @property int $occurrenceNumber
  * @property float $occurrenceRatio
  */
-class Word extends yii\base\Object
+class Word extends \yii\base\Object
 {
     /**
      * @var string
