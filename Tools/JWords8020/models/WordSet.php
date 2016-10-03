@@ -18,6 +18,7 @@ class WordSet extends \yii\base\Object
     /**
      * Add a new word in the word list.
      * @param string $word
+     * @return Word
      */
     public function addWord(string $word)
     {
@@ -25,8 +26,10 @@ class WordSet extends \yii\base\Object
         if (!isset($this->words[$word])) {
             $this->words[$word] = new Word($word);
         }
+        $result = $this->words[$word];
         // Count up the occurrence.
-        $this->words[$word]->addOccurrence();
+        $result->addOccurrence();
+        return $result;
     }
 
     /**
@@ -38,46 +41,48 @@ class WordSet extends \yii\base\Object
     {
         return isset($this->words[$word]) ? $this->words[$word] : NULL;
     }
+
+    /**
+     * Calculate occurrence ratio of words.
+     */
+    public function calcOccurrenceRatio()
+    {
+        $totalOccurrenceNumber = 0.0;
+        foreach ($this->words as $word) {
+            $totalOccurrenceNumber += $word->occurrenceNumber;
+        }
+        foreach ($this->words as $word) {
+            $word->occurrenceRatio = $word->occurrenceNumber / $totalOccurrenceNumber;
+        }
+    }
+
     /**
      * Get the list of words with highest ratio, sorting by the ratio.
      * @param float $topRatio The total ratio of words to be get.
      *                        Example: 0.5 for 50%, 1 for 100%.
      * @return Word[]
      */
-    public function getTopWord(float $topRatio = 1)
+    public function getTopWords(float $topRatio = 1)
     {
         $result = [];
 
+        $this->calcOccurrenceRatio();
+
         // Sort the words by ratio.
         uasort($this->words, function(Word $a, Word $b) {
-            return $a->occurrenceRatio >= $b;
+            return $a->occurrenceRatio >= $b->occurrenceRatio ? -1 : 1;
         });
-        // Get the word list.
+
+        // Get the word list until sum of ratio > $topRatio.
         $totalRatio = 0;
         foreach ($this->words as $text => $word) {
-            $result[$text] = $word;
-            $totalRatio += $word->occurenceRatio;
+            $result[] = $word;
+            $totalRatio += $word->occurrenceRatio;
             if ($totalRatio >= $topRatio) {
                 break;
             }
         }
 
         return $result;
-    }
-
-    /**
-     * Compare occurrenceRatio of two Words.
-     * @param Word $wordA
-     * @param Word $wordB
-     * @return number
-     */
-     static public function compareWordRatio(Word $wordA, Word $wordB)
-     {
-         $a = $wordA->occurrenceRatio;
-         $b = $wordB->occurrenceRatio;
-         if ($a == $b) {
-             return 0;
-         }
-         return ($a < $b) ? -1 : 1;
     }
 }
