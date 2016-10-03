@@ -1,12 +1,12 @@
 <?php
 namespace app\models;
 
-class WordSet extends yii\base\Object
+class WordSet extends \yii\base\Object
 {
     /**
      * Store all words' occurrences.
      * The array maps between the word (text) and a Word object.
-     * @var Word[];
+     * @var Word[]
      */
     private $words = [];
 
@@ -30,6 +30,15 @@ class WordSet extends yii\base\Object
     }
 
     /**
+     * Get a Word object of specified text.
+     * @param string $word
+     * @return NULL|\app\models\Word A word if exist, NULL otherwise.
+     */
+    public function getWord(string $word)
+    {
+        return isset($this->words[$word]) ? $this->words[$word] : NULL;
+    }
+    /**
      * Get the list of words with highest ratio, sorting by the ratio.
      * @param float $topRatio The total ratio of words to be get.
      *                        Example: 0.5 for 50%, 1 for 100%.
@@ -40,7 +49,9 @@ class WordSet extends yii\base\Object
         $result = [];
 
         // Sort the words by ratio.
-        uasort($this->words, ['self', 'compareWordRatio']);
+        uasort($this->words, function(Word $a, Word $b) {
+            return $a->occurrenceRatio >= $b;
+        });
         // Get the word list.
         $totalRatio = 0;
         foreach ($this->words as $text => $word) {
@@ -64,9 +75,9 @@ class WordSet extends yii\base\Object
      {
          $a = $wordA->occurrenceRatio;
          $b = $wordB->occurrenceRatio;
-        if ($a == $b) {
-            return 0;
-        }
-        return ($a < $b) ? -1 : 1;
+         if ($a == $b) {
+             return 0;
+         }
+         return ($a < $b) ? -1 : 1;
     }
 }
