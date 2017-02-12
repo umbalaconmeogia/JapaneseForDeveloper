@@ -2,12 +2,14 @@
 
 namespace app\controllers;
 
+use app\models\ContactForm;
+use app\models\LoginForm;
+use app\models\PatternStatistic;
+use app\models\WordCounter;
 use Yii;
 use yii\filters\AccessControl;
-use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
+use yii\web\Controller;
 
 class SiteController extends Controller
 {
@@ -121,5 +123,19 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+    
+    public function actionTestPatternStatistic()
+    {
+        $words = [];
+        $patternStatistic = new PatternStatistic(WordCounter::className());
+        for ($i = 1; $i <= 100; $i++) {
+            $word = "Word $i";
+            for ($j = 1; $j <= $i; $j++) {
+                $patternStatistic->add($word);
+            }
+        }
+        
+        return $this->render('testPatternStatistic', ['patternStatistic' => $patternStatistic]);
     }
 }
