@@ -17,7 +17,7 @@ foreach ($patternCounters as $patternCounter) {
     </tr>
     <?php foreach ($patternCounters as $patternCounter) { ?>
         <tr>
-             <td><?= $patternCounter->pcPattern ?></td>
+             <td>*<?= $patternCounter->pcPattern ?>*</td>
              <td><?= $patternCounter->pcCounter ?></td>
         </tr>
     <?php } ?>
