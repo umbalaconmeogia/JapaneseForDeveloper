@@ -23,11 +23,29 @@ class TestStatisticController extends Controller
         return $this->render('testPatternStatistic', ['patternStatistic' => $patternStatistic]);
     }
     
-    public function actionStatisticFile()
+    public function actionStatisticTextFile()
     {
         $file = \Yii::getAlias('@app/tests/_data/LoremIpsumJapanese.txt');
         $statisticText = new StatisticText();
         $statisticText->addTextFile($file);
+        
+        return $this->render('testPatternStatistic', ['patternStatistic' => $statisticText]);
+    }
+    
+    public function actionStatisticDocxFile()
+    {
+        $file = \Yii::getAlias('@app/tests/_data/LoremIpsumJapanese.docx');
+        $statisticText = new StatisticText();
+        $statisticText->addDocPdfFile($file);
+        
+        return $this->render('testPatternStatistic', ['patternStatistic' => $statisticText]);
+    }
+    
+    public function actionStatisticPdfFile()
+    {
+        $file = \Yii::getAlias('@app/tests/_data/LoremIpsumJapanese.pdf');
+        $statisticText = new StatisticText();
+        $statisticText->addDocPdfFile($file);
         
         return $this->render('testPatternStatistic', ['patternStatistic' => $statisticText]);
     }

@@ -4,7 +4,7 @@ use yii\bootstrap\Nav;
 use yii\helpers\Html;
 
 NavBar::begin([
-    'brandLabel' => 'My Company',
+    'brandLabel' => 'JWords 80-20',
     'brandUrl' => Yii::$app->homeUrl,
     'options' => [
         'class' => 'navbar-inverse navbar-fixed-top',
@@ -13,9 +13,11 @@ NavBar::begin([
 echo Nav::widget([
     'options' => ['class' => 'navbar-nav navbar-right'],
     'items' => [
-        ['label' => 'PatternStatistic', 'url' => ['/test-statistic/test-pattern-statistic']],
-        ['label' => 'StatisticFile', 'url' => ['/test-statistic/statistic-file']],
-//         ['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => 'Pattern Statistic', 'url' => ['/test-statistic/test-pattern-statistic']],
+        ['label' => 'Statistic Text File', 'url' => ['/test-statistic/statistic-text-file']],
+        ['label' => 'Statistic Docx File', 'url' => ['/test-statistic/statistic-docx-file']],
+        ['label' => 'Statistic Pdf File', 'url' => ['/test-statistic/statistic-pdf-file']],
+        //         ['label' => 'Home', 'url' => ['/site/index']],
 //         ['label' => 'About', 'url' => ['/site/about']],
 //         ['label' => 'Contact', 'url' => ['/site/contact']],
 //         Yii::$app->user->isGuest ? (

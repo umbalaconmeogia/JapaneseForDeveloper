@@ -4,11 +4,11 @@ namespace app\models;
 use app\components\TinySegmenterarray;
 use app\models\WordCounter;
 use batsg\helpers\HJapanese;
+use app\components\Filetotext;
 
 class StatisticText extends PatternStatistic
 {
-
-    public static $ignoreCharacterInWords = [
+    private static $ignoreCharacterInWords = [
         "　", // full-width space
         " ", // half-width space
         "・",
@@ -49,6 +49,13 @@ class StatisticText extends PatternStatistic
     {
         return $this->addText(file_get_contents($file));
     }
+    
+    public function addDocPdfFile($file)
+    {
+        $fileToText = new Filetotext($file);
+        return $this->addText($fileToText->convertToText());
+    }
+    
     
     /**
      * @return \app\components\TinySegmenterarray
