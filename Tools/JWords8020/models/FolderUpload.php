@@ -6,23 +6,22 @@ use batsg\helpers\HFile;
 
 class FolderUpload extends Folder
 {
-    /**
-     * @var File[]
-     */
-    private $files;
-    
-    public static $supportedFileExtension = [
-        'txt' => 'テキスト',
-        'doc' => 'MS Word',
-        'docx' => 'MS Word',
-        'pdf' => 'PDF',
-    ];
     
     /**
      * @var UploadedFile
      */
     public $uploadFile;
+
+    public function rules()
+    {
+        return [
+            [['uploadFile'], 'safe'],
+        ];
+    }
     
+    /**
+     * Process upload file specified by $uploadFile.
+     */
     public function upload()
     {
         // Ensure folder exist.
@@ -30,13 +29,24 @@ class FolderUpload extends Folder
         $extension = strtolower($this->uploadFile->extension);
         if ($extension == 'zip') {
             $this->unzipUploadedFile();
-        } else if (isset(self::$supportedFileExtension[$extension])) {
+        } else if (File::isSupportedFileExtension($extension)) {
             $this->saveUploadedFile();
         }
-        $files = HFile::listFile($this->folderPath);
-        print_r($files);
-        
-        die;
+    }
+    
+    /**
+     * Get processable files.
+     * @return string[]
+     */
+    public function getFiles()
+    {
+        $result = [];
+        foreach (HFile::listFileRecursively($this->folderPath) as $file) {
+            if (File::isSupportedFile($file)) {
+                $result[] = $file;
+            }
+        }
+        return $result;
     }
     
     private function unzipUploadedFile()

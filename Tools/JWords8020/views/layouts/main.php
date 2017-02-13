@@ -25,7 +25,9 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-    <?= $this->render('_menu') ?>
+    <?php
+//         echo $this->render('_menu');
+    ?>
 
     <div class="container">
         <?= Breadcrumbs::widget([

@@ -53,6 +53,27 @@ class HFile
     }
 
     /**
+     * List all files in a directory recursively.
+     * @param string $directory
+     * @param string[] Files' path relative to $directory
+     */
+    public static function listFileRecursively($directory)
+    {
+        $result = [];
+        foreach (scandir($directory) as $file) {
+            if ($file != '.' && $file != '..') {
+                $path = "$directory/$file";
+                if (is_file($path)) {
+                    $result[] = $path;
+                } else {
+                    $result = array_merge($result, self::listFileRecursively($path));
+                }
+            }
+        }
+        return $result;
+    }
+    
+    /**
      * List files inside specified path (exclude .
      * and ..).
      * 
