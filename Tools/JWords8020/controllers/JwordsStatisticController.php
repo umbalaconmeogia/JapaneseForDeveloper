@@ -22,6 +22,7 @@ class JwordsStatisticController extends Controller
             if ($uploadForm->uploadFile) {
                 $uploadForm->upload();                
                 $statisticText->addFile($uploadForm->getFiles());
+                $uploadForm->delete();
             }
             
             if ($uploadForm->url) {

@@ -48,7 +48,7 @@ class HFile
                 }
             }
         }
-        Yii::log("remove {$directory}");
+        \Yii::info("remove {$directory}");
         rmdir($directory);
     }
 

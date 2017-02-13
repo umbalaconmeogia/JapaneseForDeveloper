@@ -3,6 +3,7 @@ namespace app\models;
 
 use yii\base\Model;
 use batsg\helpers\HRandom;
+use batsg\helpers\HFile;
 
 /**
  * @property string $folderPath
@@ -67,5 +68,13 @@ class Folder extends Model
     public function filePath($fileName)
     {
         return $this->folderPath . '/' . $fileName;
+    }
+    
+    /**
+     * Delete folder.
+     */
+    public function delete()
+    {
+        HFile::rmdir($this->folderPath);
     }
 }
