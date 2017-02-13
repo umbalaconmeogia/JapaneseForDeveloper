@@ -13,6 +13,7 @@ NavBar::begin([
 echo Nav::widget([
     'options' => ['class' => 'navbar-nav navbar-right'],
     'items' => [
+        ['label' => '単語統計', 'url' => ['/jwords-statistic/index']],
         ['label' => 'Pattern Statistic', 'url' => ['/test-statistic/test-pattern-statistic']],
         ['label' => 'Statistic Text File', 'url' => ['/test-statistic/statistic-text-file']],
         ['label' => 'Statistic Docx File', 'url' => ['/test-statistic/statistic-docx-file']],
