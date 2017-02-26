@@ -48,9 +48,6 @@ $config = [
         ],
         */
     ],
-    'aliases' => [
-        '@batsg' => '@app/components/yii2-batsg',
-    ],
     'params' => $params,
 ];
 
