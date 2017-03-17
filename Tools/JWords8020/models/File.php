@@ -8,8 +8,8 @@ class File extends Model
 {
     public static $supportedFileExtension = [
         'txt' => 'テキスト',
-        'doc' => 'MS Word',
         'docx' => 'MS Word',
+        'pptx' => 'MS Powerpoint',
         'pdf' => 'PDF',
     ];
 
@@ -49,11 +49,14 @@ class File extends Model
                 $fileToText = new FileText();
                 $fileToText->loadFile($filePath);
                 break;
-            case 'doc':
             case 'docx':
                 $fileToText = new FileDoc();
                 $fileToText->loadFile($filePath);
                 break;
+            case 'pptx':
+                $fileToText = new FilePptx();
+                $fileToText->loadFile($filePath);
+                break;    
             case 'pdf':
                 $fileToText = new FilePdf();
                 $fileToText->loadFile($filePath);
