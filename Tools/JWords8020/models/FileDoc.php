@@ -2,6 +2,7 @@
 namespace app\models;
 
 use app\components\Filetotext;
+use PhpOffice\PhpWord\IOFactory;
 
 /**
  * Manipulate doc, docx, odt file.
@@ -24,5 +25,12 @@ class FileDoc extends FileText
          */
         $fileToText = new Filetotext($this->filePath);
         return $fileToText->convertToText();
+    }
+
+    public function readWord2007($file)
+    {
+        $text = [];
+        $phpWord = IOFactory::load($file);
+        echo "$phpWord";
     }
 }

@@ -3,6 +3,7 @@ namespace app\commands;
 
 use yii\console\Controller;
 use app\models\FileDoc;
+use app\models\HPhpOffice;
 
 class DevFileToTextController extends Controller
 {
@@ -16,5 +17,10 @@ class DevFileToTextController extends Controller
         $file->loadFile($filePath);
         $text = $file->getTextUtf8();
         echo $text;
+    }
+
+    public function actionGetTextWord2007($filePath)
+    {
+        echo HPhpOffice::getTextWord2007($filePath);
     }
 }
